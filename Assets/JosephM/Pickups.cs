@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class Pickups : MonoBehaviour
 {
-    int radius;
-
-
-    int value;
-
-
-    float health;
-
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Destroy the pickup after 10 seconds
+        Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
