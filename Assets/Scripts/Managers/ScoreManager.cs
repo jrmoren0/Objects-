@@ -6,12 +6,8 @@ using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
-
     private int score;
-
     private int highscore;
-
-
     //Using Actions
     //public Action onScoreUpdate;
 
@@ -22,10 +18,11 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-       
         highscore = PlayerPrefs.GetInt("HighScore");
-    }
+        Debug.Log("highscore " + highscore);
+     
 
+    } 
 
     public int GetScore()
     {
@@ -39,34 +36,31 @@ public class ScoreManager : MonoBehaviour
 
 
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
     public void IncrementScore()
     {
         score++;
-
         //Invokeing Actions
-        // onScoreUpdate?.Invoke();
+        //onScoreUpdate?.Invoke();
 
         OnscoreUpdated?.Invoke();
 
-       if(score > highscore)
+        if(score > highscore)
         {
             highscore = score;
             OnHighScoreUpdated?.Invoke();
 
             SetHighScore();
-         
         }
-
-
-
     }
-
 
     public void SetHighScore()
     {
         PlayerPrefs.SetInt("HighScore", highscore);
     }
-
-
 }
