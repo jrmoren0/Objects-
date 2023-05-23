@@ -7,11 +7,16 @@ public class ArrayExample : MonoBehaviour
     [SerializeField]
     private GameObject testPrefab;
 
+
     [SerializeField]
     GameObject[] testArray;
 
+
     [SerializeField]
     GameObject[] array = new GameObject[2];
+
+
+  
 
 
     void Start()
@@ -21,21 +26,30 @@ public class ArrayExample : MonoBehaviour
 
         array[1] = Instantiate(testPrefab, transform);
         array[1].transform.position = new Vector2(1, 0);
+
+
+
+
+
     }
 
-    
+
     void Update()
     {
+
+
+
         if (Input.GetKeyDown(KeyCode.R))
         {
+
             array[Random.Range(0, array.Length)].GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             Destroy(array[1].gameObject);
-
-            Debug.Log(array[1].name);
+         //   array[1].GetComponent<SpriteRenderer>().color = Random.ColorHSV();
         }
+
     }
 }

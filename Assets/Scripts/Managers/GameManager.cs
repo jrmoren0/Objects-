@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    /// <summary>
+    /// Singleton
+    /// </summary>
     private static GameManager instance;
+
 
     [SerializeField]
     GameObject enemyPrefab;
-    [SerializeField]
-    GameObject machineGunPrefab;
-    [SerializeField]
-    GameObject missileEnemyPrefab;
+
 
     private GameObject tempObject;
-    private GameObject machineGun;
-    private GameObject missileLauncher;
+
 
     [SerializeField]
     private Transform[] spawnPositions;
+
 
     [SerializeField]
     public ScoreManager scoreManager;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public Player player;
 
+
     private float seconds;
 
     public static GameManager GetInstance()
@@ -36,59 +39,62 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
+
     void SetSingleton()
     {
-        if(instance != null && instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this);
         }
 
         instance = this;
+
     }
+    //-------
+
 
     private void Awake()
     {
         SetSingleton();
     }
 
-    private void Start()
+
+
+    // Start is called before the first frame update
+    void Start()
     {
-        //seconds = 0;
-        StartCoroutine(EnemySpawner());
         
+        StartCoroutine(EnemySpawner());
+     
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             CreateEnemy();
         }
 
         
     }
+
 
     void CreateEnemy()
     {
         tempObject = Instantiate(enemyPrefab);
         tempObject.transform.position = spawnPositions[Random.Range(0, spawnPositions.Length)].position;
-        machineGun = Instantiate(machineGunPrefab);
-        machineGun.transform.position = spawnPositions[Random.Range(0, spawnPositions.Length)].position;
-        missileLauncher = Instantiate(missileEnemyPrefab);
-        missileLauncher.transform.position = spawnPositions[Random.Range(0, spawnPositions.Length)].position;
-
         //add weapon
         //set enemy
     }
 
-    IEnumerator EnemySpawner()
-    {
-        while(true)
+    IEnumerator EnemySpawner() {
+
+        while (true)
         {
-            yield return new WaitForSeconds(6.0f);
+            yield return new WaitForSeconds(1f);
             CreateEnemy();
         }
-    }
 
-    
+    }
 }
