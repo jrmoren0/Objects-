@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         {
             CreateEnemy();
         }
-
+        Debug.Log(player.health.GetHealth());
         
     }
 

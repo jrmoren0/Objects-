@@ -93,4 +93,13 @@ public class Player: PlayableObject
             Die();
         }
     }
+    public void AddHealth()
+    {
+
+
+        health.AddHealth(5);
+        healthUpdate?.Invoke(health.GetHealth());
+
+
+    }
 }
