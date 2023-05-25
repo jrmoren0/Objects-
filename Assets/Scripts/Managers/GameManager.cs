@@ -4,41 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    /// <summary>
-    /// Singleton
-    /// </summary>
     private static GameManager instance;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Transform[] spawnPositions;
+    [SerializeField] public ScoreManager scoreManager;
+    [SerializeField] public UIManager UIManager;
+    [SerializeField] public Player player;
 
+    private float initialSpawnRate = 1f; // Initial spawn rate in seconds
+    private float spawnRateIncrease = 0.1f; // Amount of spawn rate increase per second
+    private float maxSpawnRate = 0.2f; // Maximum spawn rate in seconds
 
-    [SerializeField]
-    GameObject enemyPrefab;
-
-
-    private GameObject tempObject;
-
-
-    [SerializeField]
-    private Transform[] spawnPositions;
-
-
-    [SerializeField]
-    public ScoreManager scoreManager;
-
-    [SerializeField]
-    public UIManager UIManager;
-
-    [SerializeField]
-    public Player player;
-
-
-    private float seconds;
+    private float currentSpawnRate;
 
     public static GameManager GetInstance()
     {
         return instance;
     }
 
+    private void Awake()
+    {
+        SetSingleton();
+    }
 
     void SetSingleton()
     {
@@ -48,53 +35,51 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-
-    }
-    //-------
-
-
-    private void Awake()
-    {
-        SetSingleton();
     }
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+        currentSpawnRate = initialSpawnRate;
         StartCoroutine(EnemySpawner());
-     
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
             CreateEnemy();
         }
-        Debug.Log(player.health.GetHealth());
-        
-    }
 
+
+      
+        
+
+    }
 
     void CreateEnemy()
     {
-        tempObject = Instantiate(enemyPrefab);
+        GameObject tempObject = Instantiate(enemyPrefab);
         tempObject.transform.position = spawnPositions[Random.Range(0, spawnPositions.Length)].position;
         //add weapon
         //set enemy
     }
 
-    IEnumerator EnemySpawner() {
-
+    IEnumerator EnemySpawner()
+    {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(currentSpawnRate);
             CreateEnemy();
+            UpdateSpawnRate();
         }
+    }
 
+    void UpdateSpawnRate()
+    {
+        currentSpawnRate += spawnRateIncrease;
+        if (currentSpawnRate > maxSpawnRate)
+        {
+            currentSpawnRate = maxSpawnRate;
+        }
     }
 }
