@@ -6,16 +6,29 @@ public class Pickups : MonoBehaviour
 {
     
 
-    // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         // Destroy the pickup after 10 seconds
         Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         
     }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if(other.gameObject.tag == "Player")
+        {
+            
+
+            Destroy(gameObject);
+           
+        }
+    }
+
+    
 }

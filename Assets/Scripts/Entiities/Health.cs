@@ -61,7 +61,7 @@ public class Health
     {
 
      
-        Debug.Log(currentHealth + " -  " + value + "  =  " + (currentHealth - value));
+        
         if ((currentHealth - value) < 0)
         {
             currentHealth = 0;

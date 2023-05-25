@@ -93,4 +93,9 @@ public class Player1: PlayableObject
             Die();
         }
     }
+    public void AddHealth() {
+
+
+        health.AddHealth(5);
+    } 
 }
