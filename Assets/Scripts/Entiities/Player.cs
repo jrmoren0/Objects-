@@ -77,7 +77,7 @@ public class Player: PlayableObject
     public override void Die() {
 
         Debug.Log("Player Died");
-       // Destroy(gameObject);
+        Destroy(gameObject);
     }
     
     public override void GetDamage(float damage)

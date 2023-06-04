@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public UIManager UIManager;
     [SerializeField] public Player player;
 
+    [SerializeField] private GameObject gameOverPanel;
+
     private float initialSpawnRate = 1f; // Initial spawn rate in seconds
     private float spawnRateIncrease = 0.1f; // Amount of spawn rate increase per second
     private float maxSpawnRate = 0.2f; // Maximum spawn rate in seconds
@@ -51,7 +53,11 @@ public class GameManager : MonoBehaviour
         }
 
 
-      
+      if(player == null)
+        {
+          
+            EndGame();
+        }
         
 
     }
@@ -81,5 +87,11 @@ public class GameManager : MonoBehaviour
         {
             currentSpawnRate = maxSpawnRate;
         }
+    }
+
+    void EndGame() {
+
+        gameOverPanel.SetActive(true);
+        StopAllCoroutines();
     }
 }

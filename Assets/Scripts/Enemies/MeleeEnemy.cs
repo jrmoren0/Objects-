@@ -17,12 +17,16 @@ public class MeleeEnemy:Enemy
         base.Update();
 
 
-       
-        if (Vector2.Distance(transform.position, target.position) < attackRange) {
-           
- 
+        if (target != null)
+        {
+            if (Vector2.Distance(transform.position, target.position) < attackRange)
+            {
+
+
                 Attack(1);
-            
+
+
+            }
         }
         
     }

@@ -38,7 +38,6 @@ public class PickupSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
-          
 
             x = Random.Range(-range, range);
             y = Random.Range(-range, range);
